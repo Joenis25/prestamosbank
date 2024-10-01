@@ -32,6 +32,9 @@ export class App {
         this.routePrv.clienteRoutes.routes(this.app);
         this.routePrv.cuentaBancariaRoutes.routes(this.app);
         this.routePrv.empleadoRoutes.routes(this.app);
+        this.routePrv.prestamoRoutes.routes(this.app);
+        this.routePrv.garantiaRoutes.routes(this.app);
+        this.routePrv.amortizacionRoutes.routes(this.app);
     }
 
 

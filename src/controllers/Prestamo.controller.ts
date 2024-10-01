@@ -42,7 +42,7 @@ export class PrestamoController {
     public async createPrestamo(req: Request, res: Response) {
         const { clienteId, empleadoId, fechaPrestamo, tipoPrestamo, monto, interes, estado } = req.body;
         try {
-            const newPrestamo = await Prestamo.create({
+            const prestamo = await Prestamo.create({
                 clienteId,
                 empleadoId,
                 fechaPrestamo,
@@ -51,7 +51,7 @@ export class PrestamoController {
                 interes,
                 estado
             });
-            res.status(201).json({ message: 'Préstamo creado con éxito', prestamo: newPrestamo });
+            res.status(200).json({prestamo });
         } catch (error) {
             res.status(500).json({ message: 'Error al crear el préstamo', error });
         }
@@ -74,7 +74,7 @@ export class PrestamoController {
                 prestamo.estado = estado;
                 await prestamo.save();
 
-                res.status(200).json({ message: 'Préstamo actualizado con éxito', prestamo });
+                res.status(200).json({prestamo });
             } else {
                 res.status(404).json({ message: 'Préstamo no encontrado' });
             }

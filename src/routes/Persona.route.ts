@@ -1,6 +1,6 @@
 import { Request, Response, Application, Router } from "express";
 
-import { PersonaController } from '../controllers/Persona.controller';
+import { PersonaController} from '../controllers/Persona.controller';
 
 export class PersonaRoutes {
     public personaController: PersonaController =  new PersonaController();
@@ -8,5 +8,9 @@ export class PersonaRoutes {
     public routes(app: Application): void {
         app.route("/personas/test").get(this.personaController.test)
         app.route("/personas").get(this.personaController.getAllPersona)
+        app.route("/personas/:id").get(this.personaController.getAllPersona)
+        app.route("/personas").post(this.personaController.createPersona)
+        app.route("/personas/:id").patch(this.personaController.updatePersona)
+        app.route("/personas").delete(this.personaController.deletePersona)
     }
 }

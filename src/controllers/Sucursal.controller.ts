@@ -14,8 +14,8 @@ export class SucursalController {
     // Obtener todas las sucursales activas
     public async getAllSucursal(req: Request, res: Response) {
         try {
-            const sucursal: SucursalI[] = await Sucursal.findAll(); // select * from sucursales where activo = true;
-            res.status(200).json({ sucursal });
+            const sucursales: SucursalI[] = await Sucursal.findAll(); // select * from sucursales where activo = true;
+            res.status(200).json({ sucursales });
         } catch (error) {
         }
     }

@@ -20,17 +20,18 @@ export class SucursalController {
         }
     }
     
-    public async getOneSucursal(req: Request, res:Response){
-        const { id} = req.params
-
+    public async getOneSucursal(req: Request, res: Response) {
+        const { id } = req.params;
         try {
-            const sucursal = await Sucursal.findByPk(id)
-            if (sucursal){
-                res.status(200).json({sucursal})
-            } else return  res.status(300).json({msg: "La Sucursal no existe"})
+            const sucursal = await Sucursal.findByPk(id);
 
+            if (sucursal) {
+                res.status(200).json({ sucursal });
+            } else {
+                res.status(404).json({ message: 'Préstamo no encontrado' });
+            }
         } catch (error) {
-            res.status(500).json({msg: "Error Internal"})
+            res.status(500).json({ message: 'Error al obtener el préstamo', error });
         }
     }
     
@@ -56,7 +57,7 @@ export class SucursalController {
         }
 
     }
-    public async updateSucursal(req: Request, res:Response){
+/*     public async updateSucursal(req: Request, res:Response){
         const { id:pk } = req.params;
 
         const {
@@ -95,24 +96,43 @@ export class SucursalController {
         const sucursal: SucursalI | null = await Sucursal.findByPk(pk);
         if(sucursal) return res.status(200).json({sucursal})
 
+    } */
+
+    public async updateSucursal(req: Request, res: Response) {
+        const { id } = req.params;
+        const { nombre, direccion, telefono} = req.body;
+        try {
+            const sucursal = await Sucursal.findByPk(id);
+
+            if (sucursal) {
+                sucursal.nombre = nombre;
+                sucursal.direccion = direccion;
+                sucursal.telefono = telefono;
+                await sucursal.save();
+
+                res.status(200).json({sucursal });
+            } else {
+                res.status(404).json({ message: 'Préstamo no encontrado' });
+            }
+        } catch (error) {
+            res.status(500).json({ message: 'Error al actualizar el préstamo', error });
+        }
     }
     
-    public async deleteSucursal(req: Request, res:Response){
-        const { id:pk } = req.params;
-
-
+    public async deleteSucursal(req: Request, res: Response) {
+        const { id } = req.params;
         try {
-            const sucursalExist: SucursalI | null = await Sucursal.findByPk(pk);
-            if(!sucursalExist) return res.status(500).json({msg:"La Sucursal No existe"})
-            await Sucursal.destroy(
-                {
-                    where: {id: pk}
-                }
-            )
-            res.status(200).json({msg:"Sucursal Eliminada"})
+            const sucursal = await Sucursal.findOne({ where: { id } });
+
+            if (sucursal) {
+                await sucursal.destroy();
+                res.status(200).json({ message: 'Préstamo eliminado con éxito' });
+            } else {
+                res.status(404).json({ message: 'Préstamo no encontrado' });
+            }
         } catch (error) {
-
+            res.status(500).json({ message: 'Error al eliminar el préstamo', error });
         }
-
     }
+
 }

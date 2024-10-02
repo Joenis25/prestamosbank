@@ -10,7 +10,7 @@ export class PrestamoRoutes {
         app.route("/prestamos").get(this.prestamoController.getAllPrestamo)
         app.route("/prestamos/:id").get(this.prestamoController.getOnePrestamo)
         app.route("/prestamos").post(this.prestamoController.createPrestamo)
-        app.route("/prestamos").patch(this.prestamoController.updatePrestamo)
-        app.route("/prestamos").delete(this.prestamoController.deletePrestamo)
+        app.route("/prestamos/:id").patch(this.prestamoController.updatePrestamo)
+        app.route("/prestamos/:id").delete(this.prestamoController.deletePrestamo)
     }
 }

@@ -30,7 +30,7 @@ export class EmpleadoController {
     }
 
     // Obtener un empleado por ID
-    public async getEmpleadoById(req: Request, res: Response) {
+    public async getOneEmpleado(req: Request, res: Response) {
         const { id } = req.params;
         try {
             const empleado = await Empleado.findByPk(id, {
@@ -54,11 +54,11 @@ export class EmpleadoController {
     public async createEmpleado(req: Request, res: Response) {
         const { personaId, sucursalId } = req.body;
         try {
-            const newEmpleado = await Empleado.create({
+            const empleado = await Empleado.create({
                 personaId,
                 sucursalId
             });
-            res.status(201).json({ message: 'Empleado creado con éxito', empleado: newEmpleado });
+            res.status(200).json({empleado });
         } catch (error) {
             res.status(500).json({ message: 'Error al crear empleado', error });
         }
@@ -75,7 +75,7 @@ export class EmpleadoController {
                 empleado.personaId = personaId;
                 empleado.sucursalId = sucursalId;
                 await empleado.save();
-                res.status(200).json({ message: 'Empleado actualizado con éxito', empleado });
+                res.status(200).json({empleado });
             } else {
                 res.status(404).json({ message: 'Empleado no encontrado' });
             }

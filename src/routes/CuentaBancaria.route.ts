@@ -8,5 +8,9 @@ export class CuentaBancariaRoutes {
     public routes(app: Application): void {
         app.route("/cuentas/test").get(this.cuentaBancariaController.test)
         app.route("/cuentas").get(this.cuentaBancariaController.getAllCuentaBancaria)
+        app.route("/cuentas/:id").get(this.cuentaBancariaController.getOneCuentaBancaria)
+        app.route("/cuentas").post(this.cuentaBancariaController.createCuentaBancaria)
+        app.route("/cuentas/:id").patch(this.cuentaBancariaController.updateCuentaBancaria)
+        app.route("/cuentas/:id").delete(this.cuentaBancariaController.deleteCuentaBancaria)
     }
 }

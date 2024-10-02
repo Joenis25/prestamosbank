@@ -11,6 +11,6 @@ export class SucursalRoutes {
         app.route("/sucursales/:id").get(this.sucursalController.getOneSucursal)
         app.route("/sucursales").post(this.sucursalController.createSucursal)
         app.route("/sucursales/:id").patch(this.sucursalController.updateSucursal)
-        app.route("/sucursales").delete(this.sucursalController.deleteSucursal)
+        app.route("/sucursales/:id").delete(this.sucursalController.deleteSucursal)
     }
 }

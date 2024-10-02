@@ -33,10 +33,7 @@ Persona.init(
     },
     correo: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        isEmail: true, // Verifica que el correo tenga un formato válido
-      },
+      allowNull: false
     },
     telefono: {
       type: DataTypes.STRING,

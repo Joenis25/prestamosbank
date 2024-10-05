@@ -1,6 +1,8 @@
 import express, { Application } from 'express';
 import morgan from 'morgan';
 import { Routes } from "../routes/index";
+var cors = require("cors"); // install en node y types
+
 
 
 export class App {
@@ -25,6 +27,8 @@ export class App {
         this.app.use(morgan('dev'));
         this.app.use(express.json()); // leer json raw
         this.app.use(express.urlencoded({ extended: false })); //leer json form
+        // Aquí agregas el middleware CORS
+        this.app.use(cors());
     }
     private routes() {
         this.routePrv.personaRoutes.routes(this.app);

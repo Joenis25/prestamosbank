@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { SucursalI } from '../models/Sucursal';
+import { SucursalI } from '../models/sucursal';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,9 +12,9 @@ export class SucursalService {
     private http:HttpClient
   ) { }
 
-  getAllSucursal():Observable<{sucursal:SucursalI[]}>{
+  getAllSucursal():Observable<{sucursal: SucursalI[]}>{
     return this.http
-      .get<{sucursal:SucursalI[]}>(this.base_path)
+      .get<{sucursal: SucursalI[]}>(this.base_path)
   }
 
   getOneSucursal(id: number):Observable<{sucursal:SucursalI[]}>{
@@ -33,7 +33,7 @@ export class SucursalService {
   }
 
   deleteSucursal(id: number): Observable<SucursalI> {
-    return this.http.delete<SucursalI>(`${this.base_path}/eliminar1/${id}`);
+    return this.http.delete<SucursalI>(`${this.base_path}/${id}`);
   }
 }
 

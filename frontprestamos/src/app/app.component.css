@@ -14,17 +14,17 @@ main {
 
 header {
     grid-area: header;
-    border: 1px solid royalblue;
+    border: 1px solid rgb(217, 65, 225);
 }
 
 aside {
     grid-area: aside;
-    border: 1px solid royalblue;
+    border: 1px solid rgb(225, 65, 204);
 }
 
 section {
     grid-area: section;
-    border: 1px solid royalblue;
+    border: 1px solid rgb(164, 65, 225);
 }
 
 .recuadros {
@@ -40,5 +40,5 @@ section {
 
 footer {
     grid-area: footer;
-    border: 1px solid royalblue;
+    border: 1px solid rgb(225, 177, 65);
 }

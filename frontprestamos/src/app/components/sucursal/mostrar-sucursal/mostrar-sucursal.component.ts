@@ -1,5 +1,5 @@
-import { Component, OnInit} from '@angular/core';
-import { SucursalI } from '../../../models/Sucursal';
+import { Component, OnInit } from '@angular/core';
+import { SucursalI } from '../../../models/sucursal';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { TableModule } from 'primeng/table';
@@ -19,30 +19,27 @@ export class MostrarSucursalComponent implements OnInit{
     private sucursalService: SucursalService,
     private router: Router
   ) { }
-
   ngOnInit(): void {
-    this.mostrarSucursal()
+    this.mostrarSucursales()
   }
-  mostrarSucursal() {
-    this.sucursalService.getAllSucursal()
-      .subscribe({
+  mostrarSucursales() {
+    this.sucursalService.getAllSucursal().subscribe({
         next: (data) => {
           this.sucursales = data.sucursal
-          console.log(data)
+           console.log(data)
         }
-    })
+      })
   }
   eliminar(id: number): void{
     this.router.navigateByUrl('/sucursales');
     this.sucursalService.deleteSucursal(id).subscribe(
       () => {
-        // this.messageService.add({severity:'warn', summary: 'Notificación', detail: 'Sucursal Eliminado', life:5000});
-        this.mostrarSucursal();
+        // this.messageService.add({severity:'warn', summary: 'Notificación', detail: 'Sucursales Eliminado', life:5000});
+        this.mostrarSucursales();
       },
       err => {
         console.log('error')
         this.router.navigateByUrl('/sucursales');
-
       }
     );
   }

@@ -25,7 +25,7 @@ export class MostrarSucursalComponent implements OnInit{
   mostrarSucursales() {
     this.sucursalService.getAllSucursal().subscribe({
         next: (data) => {
-          this.sucursales = data.sucursal
+          this.sucursales = data.sucursales
            console.log(data)
         }
       })

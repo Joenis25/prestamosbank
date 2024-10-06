@@ -31,7 +31,7 @@ export class AsideComponent {
       {
         label: 'Personas',
         icon: 'pi pi-fw pi-qrcode',
-
+        routerLink: '/personas'
       },
       {
         label: 'Sucursales',

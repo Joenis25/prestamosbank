@@ -12,14 +12,14 @@ export class SucursalService {
     private http:HttpClient
   ) { }
 
-  getAllSucursal():Observable<{sucursal: SucursalI[]}>{
+  getAllSucursal():Observable<{sucursales: SucursalI[]}>{
     return this.http
-      .get<{sucursal: SucursalI[]}>(this.base_path)
+      .get<{sucursales: SucursalI[]}>(this.base_path)
   }
 
-  getOneSucursal(id: number):Observable<{sucursal:SucursalI[]}>{
+  getOneSucursal(id: number):Observable<{sucursales:SucursalI[]}>{
     return this.http
-      .get<{sucursal:SucursalI[]}>(`${this.base_path}/${id}`)
+      .get<{sucursales:SucursalI[]}>(`${this.base_path}/${id}`)
   }
 
 

@@ -1,24 +1,25 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SucursalService } from '../../../services/sucursal.service';
-import { SucursalI } from '../../../models/sucursal';
+import { PersonaService } from '../../../services/persona.service';
+import { PersonaI } from '../../../models/persona';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-actualizar-sucursal',
+  selector: 'app-actualizar-persona',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, CardModule, ButtonModule],
-  templateUrl: './actualizar-sucursal.component.html',
-  styleUrl: './actualizar-sucursal.component.css'
+  templateUrl: './actualizar-persona.component.html',
+  styleUrl: './actualizar-persona.component.css'
 })
-export class ActualizarSucursalComponent implements OnInit {
+export class ActualizarPersonaComponent implements OnInit{
+
   public id: number = 0;
   public form!: FormGroup; // Se inicializa en ngOnInit
 
-  sucursalService = inject(SucursalService);
+  personaService = inject(PersonaService);
   
   constructor(
     private formBuilder: FormBuilder, // Se inyecta en el constructor
@@ -31,25 +32,27 @@ export class ActualizarSucursalComponent implements OnInit {
     this.form = this.formBuilder.group({
       id: [''],
       nombre: ['', [Validators.required]],
+      apellido: ['', [Validators.required]],
       direccion: ['', [Validators.required]],
+      correo: ['', [Validators.required]],
       telefono: ['', [Validators.required]],
     });
 
-    // Obtención del id del sucursal y los datos del sucursal
+    // Obtención del id del persona y los datos del p
     this.id = this.route.snapshot.params['id'];
-    this.getSucursal(this.id);
+    this.getPersona(this.id);
   }
 
-  getSucursal(id: number) {
-    this.sucursalService.getOneSucursal(id)
+  getPersona(id: number) {
+    this.personaService.getOnePersona(id)
       .subscribe({
         next: (data) => {
           console.log(data);
           
-          this.form.patchValue(data); // Carga los datos de sucursal en el formulario
+          this.form.patchValue(data); // Carga los datos de persona en el formulario
         },
         error: (err) => {
-          console.error('Error obteniendo cliente:', err);
+          console.error('Error obteniendo persona:', err);
         }
       });
 
@@ -62,10 +65,10 @@ export class ActualizarSucursalComponent implements OnInit {
       return;
     }
 
-    const formValue: SucursalI = this.form.value;
-    this.sucursalService.updateSucursal(this.id, formValue).subscribe(
+    const formValue: PersonaI = this.form.value;
+    this.personaService.updatePersona(this.id, formValue).subscribe(
       () => {
-        this.router.navigateByUrl('sucursales');
+        this.router.navigateByUrl('personas');
       },
       err => {
         console.log(err);
@@ -75,11 +78,13 @@ export class ActualizarSucursalComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigateByUrl('/sucursales ');
+    this.router.navigateByUrl('/personas ');
   }
 
   // Getters del formulario
   get nombre() { return this.form.get('nombre'); }
+  get apellido() { return this.form.get('apellido'); }
   get direccion() { return this.form.get('direccion'); }
+  get correo() { return this.form.get('correo'); }
   get telefono() { return this.form.get('telefono'); }
 }

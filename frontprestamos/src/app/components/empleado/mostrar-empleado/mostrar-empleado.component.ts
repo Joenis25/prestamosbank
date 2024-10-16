@@ -1,46 +1,47 @@
 import { Component, OnInit } from '@angular/core';
-import { SucursalI } from '../../../models/sucursal';
+import { EmpleadoI } from '../../../models/empleado';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
-import { SucursalService } from '../../../services/sucursal.service'
+import { EmpleadoService } from '../../../services/empleado.service'
 
 @Component({
-  selector: 'app-mostrar-sucursal',
+  selector: 'app-mostrar-empleado',
   standalone: true,
   imports: [TableModule, ButtonModule, CardModule, RouterModule],
-  templateUrl: './mostrar-sucursal.component.html',
-  styleUrl: './mostrar-sucursal.component.css'
+  templateUrl: './mostrar-empleado.component.html',
+  styleUrl: './mostrar-empleado.component.css'
 })
-export class MostrarSucursalComponent implements OnInit{
-  public sucursales:SucursalI[] = []
+export class MostrarEmpleadoComponent implements OnInit{
+
+  public empleados:EmpleadoI[] = []
   constructor(
-    private sucursalService: SucursalService,
+    private empleadoService: EmpleadoService,
     private router: Router
   ) { }
   ngOnInit(): void {
-    this.mostrarSucursales()
+    this.mostrarEmpleados()
   }
-  mostrarSucursales() {
-    this.sucursalService.getAllSucursal().subscribe({
+  mostrarEmpleados() {
+    this.empleadoService.getAllEmpleado().subscribe({
         next: (data) => {
-          this.sucursales = data.sucursales
+          this.empleados = data.empleados
            console.log(data)
         }
       })
   }
   eliminar(id: number): void{
-    this.router.navigateByUrl('/sucursales');
-    this.sucursalService.deleteSucursal(id).subscribe(
+    this.router.navigateByUrl('/empleados');
+    this.empleadoService.deleteEmpleado(id).subscribe(
       () => {
         // this.messageService.add({severity:'warn', summary: 'Notificación', detail: 'Sucursales Eliminado', life:5000});
-        this.mostrarSucursales();
+        this.mostrarEmpleados();
       },
       err => {
         console.log('error')
-        this.router.navigateByUrl('/sucursales');
+        this.router.navigateByUrl('/empleados');
       }
     );
   }

@@ -1,4 +1,4 @@
-<p-card header="Crear Sucursal"  [style]="{ width: '100%' }">
+<p-card header="Crear Empleados"  [style]="{ width: '100%' }">
     <ng-template pTemplate="header">
 
     </ng-template>
@@ -10,25 +10,15 @@
           <div class="col-12 sm:col-6">
               <div class="p-inputgroup mb-1">
                   <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                  <input class="w-12" type="text" pInputText formControlName="nombre" placeholder="nombre"  title="nombre">         
+                  <input class="w-12" type="text" pInputText formControlName="personaId" placeholder="personaId"  title="personaId">         
               </div>
           </div>
 
           <div class="col-12 sm:col-6">
             <div class="p-inputgroup mb-1 ">
                   <span class="p-inputgroup-addon"><i class="pi pi-wallet"></i></span>
-                  <input class="w-12" type="text" pInputText formControlName="direccion" placeholder="direccion" title="direccion" >          
+                  <input class="w-12" type="text" pInputText formControlName="sucursalId" placeholder="sucursalId" title="sucursalId" >          
             </div>
-          </div>
-
-        </div>
-
-        <div class="grid">
-          <div class="col-12 sm:col-6">
-              <div class="p-inputgroup mb-1">
-                  <span class="p-inputgroup-addon"><i class="pi pi-phone"></i></span>
-                  <input class="w-12" type="text" pInputText formControlName="telefono" placeholder="telefono"  title="telefono">         
-              </div>
           </div>
 
         </div>
@@ -37,7 +27,7 @@
           <button 
                       pButton 
                       pRipple
-                      label="Actualizar"
+                      label="Guardar"
                       icon="pi pi-save"
                       severity="info"
                       class="mr-4"
@@ -47,7 +37,7 @@
           <button 
                       pButton 
                       pRipple
-                      label="Actualizar"
+                      label="Cancelar"
                       icon="pi pi-times-circle"
                       severity="warning"
                       class="mr-4"

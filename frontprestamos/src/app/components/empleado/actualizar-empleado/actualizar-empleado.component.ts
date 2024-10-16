@@ -1,24 +1,25 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ClienteService } from '../../../services/cliente.service';
-import { ClienteI } from '../../../models/cliente';
+import { EmpleadoService } from '../../../services/empleado.service';
+import { EmpleadoI } from '../../../models/empleado';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-actualizar-cliente',
+  selector: 'app-actualizar-empleado',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, CardModule, ButtonModule],
-  templateUrl: './actualizar-cliente.component.html',
-  styleUrl: './actualizar-cliente.component.css'
+  templateUrl: './actualizar-empleado.component.html',
+  styleUrl: './actualizar-empleado.component.css'
 })
-export class ActualizarClienteComponent implements OnInit{
+export class ActualizarEmpleadoComponent implements OnInit{
+
   public id: number = 0;
   public form!: FormGroup; // Se inicializa en ngOnInit
 
-  clienteService = inject(ClienteService);
+  empleadoService = inject(EmpleadoService);
   
   constructor(
     private formBuilder: FormBuilder, // Se inyecta en el constructor
@@ -29,26 +30,25 @@ export class ActualizarClienteComponent implements OnInit{
   ngOnInit(): void {
     // Inicialización del formulario
     this.form = this.formBuilder.group({
-      id: [''],
       personaId: ['', [Validators.required]],
-      contrato: ['', [Validators.required]],
+      sucursalId: ['', [Validators.required]],
     });
 
-    // Obtención del id del cliente y los datos del cliente
+    // Obtención del id del empleado y los datos del empleado
     this.id = this.route.snapshot.params['id'];
-    this.getCliente(this.id);
+    this.getEmpleado(this.id);
   }
 
-  getCliente(id: number) {
-    this.clienteService.getOneCliente(id)
+  getEmpleado(id: number) {
+    this.empleadoService.getOneEmpleado(id)
       .subscribe({
         next: (data) => {
           console.log(data);
           
-          this.form.patchValue(data); // Carga los datos de cliente en el formulario
+          this.form.patchValue(data); // Carga los datos de empleado en el formulario
         },
         error: (err) => {
-          console.error('Error obteniendo cliente:', err);
+          console.error('Error obteniendo empleado:', err);
         }
       });
 
@@ -61,10 +61,10 @@ export class ActualizarClienteComponent implements OnInit{
       return;
     }
 
-    const formValue: ClienteI = this.form.value;
-    this.clienteService.updateCliente(this.id, formValue).subscribe(
+    const formValue: EmpleadoI = this.form.value;
+    this.empleadoService.updateEmpleado(this.id, formValue).subscribe(
       () => {
-        this.router.navigateByUrl('clientes');
+        this.router.navigateByUrl('empleados');
       },
       err => {
         console.log(err);
@@ -74,10 +74,10 @@ export class ActualizarClienteComponent implements OnInit{
   }
 
   cancel() {
-    this.router.navigateByUrl('/clientes ');
+    this.router.navigateByUrl('/empleados ');
   }
 
   // Getters del formulario
   get personaId() { return this.form.get('personaId'); }
-  get contrato() { return this.form.get('contrato'); }
+  get sucursalId() { return this.form.get('sucursalId'); }
 }

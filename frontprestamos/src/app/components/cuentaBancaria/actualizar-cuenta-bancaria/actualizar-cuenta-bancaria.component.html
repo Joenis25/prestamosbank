@@ -1,4 +1,4 @@
-<p-card header="Crear Sucursal"  [style]="{ width: '100%' }">
+<p-card header="Crear CuentaBancaria"  [style]="{ width: '100%' }">
     <ng-template pTemplate="header">
 
     </ng-template>
@@ -10,14 +10,14 @@
           <div class="col-12 sm:col-6">
               <div class="p-inputgroup mb-1">
                   <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                  <input class="w-12" type="text" pInputText formControlName="nombre" placeholder="nombre"  title="nombre">         
+                  <input class="w-12" type="text" pInputText formControlName="clienteId" placeholder="clienteId"  title="clienteId">         
               </div>
           </div>
 
           <div class="col-12 sm:col-6">
             <div class="p-inputgroup mb-1 ">
                   <span class="p-inputgroup-addon"><i class="pi pi-wallet"></i></span>
-                  <input class="w-12" type="text" pInputText formControlName="direccion" placeholder="direccion" title="direccion" >          
+                  <input class="w-12" type="text" pInputText formControlName="numeroCuenta" placeholder="numeroCuenta" title="numeroCuenta" >          
             </div>
           </div>
 
@@ -27,9 +27,17 @@
           <div class="col-12 sm:col-6">
               <div class="p-inputgroup mb-1">
                   <span class="p-inputgroup-addon"><i class="pi pi-phone"></i></span>
-                  <input class="w-12" type="text" pInputText formControlName="telefono" placeholder="telefono"  title="telefono">         
+                  <input class="w-12" type="text" pInputText formControlName="tipoCuenta" placeholder="tipoCuenta"  title="tipoCuenta">         
               </div>
           </div>
+
+
+          <div class="col-12 sm:col-6">
+            <div class="p-inputgroup mb-1">
+                <span class="p-inputgroup-addon"><i class="pi pi-phone"></i></span>
+                <input class="w-12" type="text" pInputText formControlName="saldo" placeholder="saldo"  title="saldo">         
+            </div>
+         </div>
 
         </div>
 

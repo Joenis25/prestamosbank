@@ -1,47 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-import { SucursalI } from '../../../models/sucursal';
+import { PrestamoI } from '../../../models/prestamo';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
-import { SucursalService } from '../../../services/sucursal.service'
+import { PrestamoService } from '../../../services/prestamo.service'
 
 @Component({
-  selector: 'app-mostrar-sucursal',
+  selector: 'app-mostrar-prestamo',
   standalone: true,
   imports: [TableModule, ButtonModule, CardModule, RouterModule],
-  templateUrl: './mostrar-sucursal.component.html',
-  styleUrl: './mostrar-sucursal.component.css'
+  templateUrl: './mostrar-prestamo.component.html',
+  styleUrl: './mostrar-prestamo.component.css'
 })
-export class MostrarSucursalComponent implements OnInit{
-  public sucursales:SucursalI[] = []
+export class MostrarPrestamoComponent implements OnInit{
+  public prestamos:PrestamoI[] = []
   constructor(
-    private sucursalService: SucursalService,
+    private prestamoService: PrestamoService,
     private router: Router
   ) { }
   ngOnInit(): void {
-    this.mostrarSucursales()
+    this.mostrarPrestamos()
   }
-  mostrarSucursales() {
-    this.sucursalService.getAllSucursal().subscribe({
+  mostrarPrestamos() {
+    this.prestamoService.getAllPrestamo().subscribe({
         next: (data) => {
-          this.sucursales = data.sucursales
+          this.prestamos = data.prestamos
            console.log(data)
         }
       })
   }
   eliminar(id: number): void{
-    this.router.navigateByUrl('/sucursales');
-    this.sucursalService.deleteSucursal(id).subscribe(
+    this.router.navigateByUrl('/prestamos');
+    this.prestamoService.deletePrestamo(id).subscribe(
       () => {
         // this.messageService.add({severity:'warn', summary: 'Notificación', detail: 'Sucursales Eliminado', life:5000});
-        this.mostrarSucursales();
+        this.mostrarPrestamos();
       },
       err => {
         console.log('error')
-        this.router.navigateByUrl('/sucursales');
+        this.router.navigateByUrl('/prestamos');
       }
     );
   }
+
 }

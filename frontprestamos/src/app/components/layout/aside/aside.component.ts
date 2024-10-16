@@ -41,14 +41,19 @@ export class AsideComponent {
       {
         label: 'Empleados',
         icon: 'pi pi-fw pi-shopping-cart',
+        routerLink: '/empleados'
       },
       {
         label: 'CuentasBacarias',
         icon: 'pi pi-fw pi-shopping-cart',
+        routerLink: '/CuentasBacarias'
+
       },
       {
         label: 'Prestamos',
         icon: 'pi pi-fw pi-shopping-cart',
+        routerLink: '/prestamos'
+
       },
       {
         label: 'Garantia',
